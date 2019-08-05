@@ -29,13 +29,14 @@ module.exports = {
     ],
     output: {
         path: BUILD_PATH,
-        filename: 'bundle.js'
+        filename: 'bundle.js',
     },
     resolve: {
         alias:{
             SHADERS: SHADER_PATH,
             SRC: SRC_PATH,
             SCSS: SCSS_PATH,
+            JS: JS_PATH
             //ASSETS: ASSETS_PATH
         }
     },
