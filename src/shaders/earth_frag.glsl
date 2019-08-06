@@ -48,34 +48,38 @@ void main() {
   /* Color top mountain */
   vec4 topMountain1 = vec4(255.0/255.0, 255.0/255.0, 255.0/255.0, 1.0);
   vec4 topMountain2 = vec4(220.0/255.0, 220.0/255.0, 220.0/255.0, 1.0);
-  float color_step = smoothstep(5.0 ,10.0, elevation);
-  topMountainColor = mix(topMountain1, topMountain2, color_step);
+  float colorStep = smoothstep(5.0 ,10.0, elevation);
+  topMountainColor = mix(topMountain1, topMountain2, colorStep);
 
   /* Color mountain */
   vec4 mountain1 = vec4(50.0/255.0, 50.0/255.0, 50.0/255.0, 1.0);
   vec4 mountain2 = vec4(32.0/255.0, 32.0/255.0, 32.0/255.0, 1.0);
-  color_step = smoothstep(.9, 3.5, elevation);
-  mountainColor = mix(mountain1,mountain2, color_step);
+  colorStep = smoothstep(.9, 3.5, elevation);
+  mountainColor = mix(mountain1,mountain2, colorStep);
 
-  /* Color green terrain */
-  /*vec4 green1 = vec4(0.0/255.0, 102.0/255.0, 0.0/255.0, 1.0);
-  vec4 green2 = vec4(0.0/255.0, 153.0/255.0, 0.0/255.0, 1.0);*/
+  /* Color green/dirt terrain */
   vec4 dirt = vec4(63.0/255.0, 42.0/255.0, 20.0/255.0, 1.0);
   vec4 green = vec4(0.0/255.0, 102.0/255.0, 0.0/255.0, 1.0);
   float terrainNoise = fbm(vPosition*0.3, 1.5, .8, 0.5, 2.0);
   float terrainStep = smoothstep(0.,1., terrainNoise);
   
   terrainColor = mix(dirt,green, terrainStep);
-  float greens_step = 1.0 - smoothstep(0.0, 0.2, elevation);
+  float dirtGreenStep = 1.0 - smoothstep(-0.5, 0.2, elevation);
   
-  /* Sand */
-  /*vec4 sand1 = vec4(244.0/255.0, 164.0/255.0, 96.0/255.0, 1.0);
+  /* Color sand */
+  vec4 sand1 = vec4(244.0/255.0, 164.0/255.0, 96.0/255.0, 1.0);
   vec4 sand2 = vec4(255.0/255.0, 228.0/255.0, 181.0/255.0, 1.0);
-  float sandNoise = fbm(vPosition, 1.5, .8, 0.5, 2.0);*/
+  float sandNoise = fbm(vPosition, 10.5, 10., .5, 2.0);
+  float sandStep = smoothstep(0.,1.5, sandNoise);
+  vec4 sandColor = mix(sand1,sand2, sandStep);
+  float finalSandStep = 1.0 - smoothstep(-6.5,-0.5, elevation);
 
-  finalColor = mix(mountainColor, topMountainColor, color_step);
-  finalColor = mix(finalColor, terrainColor, greens_step);
+  /* Final color, assemble! */
+  finalColor = mix(mountainColor, topMountainColor, colorStep);
+  finalColor = mix(finalColor, terrainColor, dirtGreenStep);
+  finalColor = mix(finalColor, sandColor, finalSandStep);
 
+  /* */
   vec4 lightning = calculateLightning(vViewPosition, newNormal);
 
   gl_FragColor = finalColor * lightning;// * lightning;
