@@ -1,6 +1,7 @@
 import {PointLight} from 'SRC/js/sceneObjects/pointLight.js';
 import {Earth} from 'SRC/js/sceneObjects/earth.js';
 import {Ocean} from 'SRC/js/sceneObjects/ocean.js';
+import {Cloud} from 'SRC/js/sceneObjects/cloud.js';
 
 import * as Stats from 'stats.js';
 
@@ -53,7 +54,8 @@ export default class SceneManager {
             const sceneSubjects = [
                 new PointLight(scene),
                 new Earth(scene),
-                new Ocean(scene)
+                new Ocean(scene),
+                new Cloud(scene)
             ];
             return sceneSubjects;
         }

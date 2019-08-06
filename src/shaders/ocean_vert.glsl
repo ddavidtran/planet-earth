@@ -14,5 +14,4 @@ void main() {
   //The light is in camera coordinates so need the vertex position in camera coords too.
   vViewPosition = vec3(modelViewMatrix * vec4(vPosition,1.0));
   gl_Position = projectionMatrix * modelViewMatrix * vec4( vPosition, 1.0 );
-
 }
