@@ -29,11 +29,13 @@ vec4 calculateLightning(vec3 vViewPosition, vec3 newNormal){
   
   return vec4(ka * ambientColor + 
               kd *(clampDot(lightDirection,newNormal))*diffuseColor + 
-              ks*pow(clampDot(Rm,V),shininess) * specularColor, 0.7);
+              ks*pow(clampDot(Rm,V),shininess) * specularColor, 0.8);
 }
 
 void main () {
   vec3 newNormal = normalize(cross( dFdx( vViewPosition ), dFdy( vViewPosition ) ));
+
+  /* Calculate lightning */
   vec4 lightning = calculateLightning(vViewPosition, newNormal);
 
   gl_FragColor = lightning;

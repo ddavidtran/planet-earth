@@ -26,6 +26,8 @@ void main() {
   vNormal = normal;
 
   elevation = fbm(vPosition, u_amplitude, u_frequency, u_gain, u_lacunarity);
+  
+  /* Move the position along the normal and transform it with elevation */
   vPosition = vPosition + vNormal * elevation;
 
   //The light is in camera coordinates so need the vertex position in camera coords too.

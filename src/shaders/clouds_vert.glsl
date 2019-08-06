@@ -3,7 +3,9 @@ varying vec3 vNormal;
 varying vec3 vViewPosition;
 varying float noise;
 varying float intensity;
+
 uniform float u_time;
+uniform float u_speed;
 
 #define OCTAVES 1
 float fbm(vec3 pos){
@@ -24,7 +26,7 @@ void main() {
   vPosition = position;
   vNormal = normal;
   
-  noise = fbm((vPosition*0.10 - u_time*0.45)-0.45);
+  noise = fbm((vPosition*0.10 - u_time*u_speed)-0.45);
   vPosition = vPosition + vNormal * noise * 10.;
 
   //The light is in camera coordinates so need the vertex position in camera coords too.

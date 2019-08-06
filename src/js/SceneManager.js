@@ -2,13 +2,17 @@ import {PointLight} from 'SRC/js/sceneObjects/pointLight.js';
 import {Earth} from 'SRC/js/sceneObjects/earth.js';
 import {Ocean} from 'SRC/js/sceneObjects/ocean.js';
 import {Cloud} from 'SRC/js/sceneObjects/cloud.js';
-
-import * as Stats from 'stats.js';
 import { Glow } from './sceneObjects/glow';
+
+import * as dat from 'dat.gui';
+import * as Stats from 'stats.js';
 
 export default class SceneManager {
     constructor(canvas) {
         var skyboxLoader, skyboxTexture;
+        /* DAT.GUI */
+        const gui = new dat.GUI();  
+
         /*Stats.js*/
         var stats = new Stats();
         stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -22,6 +26,7 @@ export default class SceneManager {
             width: canvas.innerWidth, 
             height: canvas.innerHeight
         };
+        
         const scene = buildScene();
         const renderer = buildRenderer(screenDimensions);
         var camera = buildCamera(screenDimensions);
@@ -66,9 +71,9 @@ export default class SceneManager {
         function createSceneSubjects(scene) {
             const sceneSubjects = [
                 new PointLight(scene),
-                new Earth(scene),
-                new Ocean(scene),
-                new Cloud(scene),
+                new Earth(scene,gui),
+                new Ocean(scene,gui),
+                new Cloud(scene, gui),
                 new Glow(scene)
             ];
             return sceneSubjects;
@@ -76,9 +81,8 @@ export default class SceneManager {
 
         this.update = function () {
             stats.begin();
-            const elapsedTime = clock.getElapsedTime();
             for (let i = 0; i < sceneSubjects.length; i++)
-                sceneSubjects[i].update(elapsedTime);
+                sceneSubjects[i].update();
             renderer.render(scene, camera);
             stats.end();
         };

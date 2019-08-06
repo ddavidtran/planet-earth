@@ -2,20 +2,19 @@ import earth_frag from 'SHADERS/earth_frag.glsl';
 import earth_vert from 'SHADERS/earth_vert.glsl';
 import simplexNoise3D from 'SHADERS/noise3D.glsl';
 import {sharedUniforms} from 'SRC/js/utils/sharedUniforms.js';
-import * as dat from 'dat.gui';
 
 export class Earth {
-    constructor(scene) {
+    constructor(scene, gui) {
         var earthMaterial, earthObj, earthUniforms, sUniforms;
         sUniforms = sharedUniforms();
 
+        /* Setup GUI Controls for Earth */
         var guiControls =  new function() {
             this.Amplitude = 0.6;
             this.Frequency = 0.8;
             this.Gain = 0.5;
             this.Lacunarity = 2.0;
           };
-        const gui = new dat.GUI();  
         var earthGUI = gui.addFolder('Earth');
         earthGUI.open();
         earthGUI.add(guiControls, 'Amplitude', 0, 1); 
@@ -23,6 +22,7 @@ export class Earth {
         earthGUI.add(guiControls, 'Gain', 0, 1);
         earthGUI.add(guiControls, 'Lacunarity', 0, 2.5);  
 
+        /* Uniforms */
         earthUniforms = {
             lightPos: {
                 type: sUniforms["lightPos"].type,
@@ -46,6 +46,7 @@ export class Earth {
               }
         };
 
+        /* Material */
         earthMaterial = new THREE.ShaderMaterial({
             uniforms: THREE.UniformsUtils.merge([
                 THREE.UniformsLib["ambient"],
@@ -56,11 +57,12 @@ export class Earth {
             fragmentShader: simplexNoise3D + earth_frag,
             lights: true,
         });
-
+        
+        /* Add object to scene */
         earthObj = new THREE.Mesh(new THREE.IcosahedronGeometry(20, 5), earthMaterial);
         scene.add(earthObj);
 
-        this.update = function (time) {
+        this.update = function () {
             sendUniforms();
             earthObj.rotateY(0.001); 
         };

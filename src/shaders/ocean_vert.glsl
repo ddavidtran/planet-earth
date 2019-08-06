@@ -9,6 +9,8 @@ void main() {
   vNormal = normal;
   
   float noise = 0.2 * snoise(3.*vec4(vPosition, u_time));
+  
+  /* Move the position along the normal and transform it with noise */
   vPosition = vPosition + vNormal * noise;
 
   //The light is in camera coordinates so need the vertex position in camera coords too.

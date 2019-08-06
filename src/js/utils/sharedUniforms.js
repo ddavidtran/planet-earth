@@ -1,3 +1,4 @@
+/* Exported function in order to share lightPos in shader */
 export function sharedUniforms(){
     const sharedUniforms = {
         lightPos:{

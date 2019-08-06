@@ -38,19 +38,19 @@ void main() {
 
   vec4 finalColor, topMountainColor, mountainColor, terrainColor;
 
-  /* Color top mountain */
+  /* Hermite interpolation and linear interpolation for top of the mountains */
   vec4 topMountain1 = vec4(255.0/255.0, 255.0/255.0, 255.0/255.0, 1.0);
   vec4 topMountain2 = vec4(220.0/255.0, 220.0/255.0, 220.0/255.0, 1.0);
   float colorStep = smoothstep(5.0 ,10.0, elevation);
   topMountainColor = mix(topMountain1, topMountain2, colorStep);
 
-  /* Color mountain */
+  /* Hermite interpolation and linear interpolation for mountains */
   vec4 mountain1 = vec4(50.0/255.0, 50.0/255.0, 50.0/255.0, 1.0);
   vec4 mountain2 = vec4(32.0/255.0, 32.0/255.0, 32.0/255.0, 1.0);
   colorStep = smoothstep(.9, 3.5, elevation);
   mountainColor = mix(mountain1,mountain2, colorStep);
 
-  /* Color green/dirt terrain */
+  /* Hermite interpolation and linear interpolation for dirt/green */
   vec4 dirt = vec4(63.0/255.0, 42.0/255.0, 20.0/255.0, 1.0);
   vec4 green = vec4(0.0/255.0, 102.0/255.0, 0.0/255.0, 1.0);
   float terrainNoise = fbm(vPosition*0.3, 1.5, .8, 0.5, 2.0);
@@ -59,7 +59,7 @@ void main() {
   terrainColor = mix(dirt,green, terrainStep);
   float dirtGreenStep = 1.0 - smoothstep(-0.5, 0.2, elevation);
   
-  /* Color sand */
+  /* Hermite interpolation and linear interpolation for sand (under water) */
   vec4 sand1 = vec4(244.0/255.0, 164.0/255.0, 96.0/255.0, 1.0);
   vec4 sand2 = vec4(255.0/255.0, 228.0/255.0, 181.0/255.0, 1.0);
   float sandNoise = fbm(vPosition, 10.5, 10., .5, 2.0);
@@ -72,8 +72,8 @@ void main() {
   finalColor = mix(finalColor, terrainColor, dirtGreenStep);
   finalColor = mix(finalColor, sandColor, finalSandStep);
 
-  /* */
+  /* Calculate lightning */
   vec4 lightning = calculateLightning(vViewPosition, newNormal);
 
-  gl_FragColor = finalColor * lightning;// * lightning;
+  gl_FragColor = finalColor * lightning;
 }

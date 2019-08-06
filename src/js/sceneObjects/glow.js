@@ -7,6 +7,7 @@ export class Glow {
         var glowMaterial, glowObj, glowUniforms, sUniforms;
         sUniforms = sharedUniforms();
 
+        /* Uniforms */
         glowUniforms = {
             lightPos: {
                 type: sUniforms["lightPos"].type,
@@ -14,6 +15,7 @@ export class Glow {
             }
         };
 
+        /* Material */
         glowMaterial = new THREE.ShaderMaterial({
             uniforms: THREE.UniformsUtils.merge([
                 THREE.UniformsLib["ambient"],
@@ -28,8 +30,8 @@ export class Glow {
             transparent: true
         });
 
+        /* Add object to scene */
         glowObj = new THREE.Mesh(new THREE.IcosahedronGeometry(35, 5), glowMaterial);
-        
         scene.add(glowObj);
 
         this.update = function (time) {
