@@ -11,7 +11,8 @@ export default class SceneManager {
     constructor(canvas) {
         var skyboxLoader, skyboxTexture;
         /* DAT.GUI */
-        const gui = new dat.GUI();  
+        const gui = new dat.GUI({autoPlace: false});
+        document.getElementById("my-gui-container").appendChild(gui.domElement);  
 
         /*Stats.js*/
         var stats = new Stats();
