@@ -2,19 +2,19 @@ import ocean_frag from 'SHADERS/ocean_frag.glsl';
 import ocean_vert from 'SHADERS/ocean_vert.glsl';
 import {sharedUniforms} from 'SRC/js/utils/sharedUniforms.js';
 import simplexNoise4D from 'SHADERS/noise4D.glsl';
-import {datGUI} from 'SRC/js/utils/datGUI.js';
+import * as dat from 'dat.gui';
 
 export class Ocean {
     constructor(scene) {
         var oceanMaterial, oceanObj, oceanUniforms, sUniforms;
         var start = Date.now();
         sUniforms = sharedUniforms();
-        var gui;
-        gui = datGUI();
+  
         var guiControls =  new function() {
             this.WaterLevel = 1.0;
           };
-          
+        
+        const gui = new dat.GUI();  
         var oceanGUI = gui.addFolder('Ocean');
         oceanGUI.open();
         oceanGUI.add(guiControls, 'WaterLevel', 0.8, 1.05); 

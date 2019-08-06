@@ -8,6 +8,7 @@ import { Glow } from './sceneObjects/glow';
 
 export default class SceneManager {
     constructor(canvas) {
+        var skyboxLoader, skyboxTexture;
         /*Stats.js*/
         var stats = new Stats();
         stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -21,14 +22,25 @@ export default class SceneManager {
             width: canvas.innerWidth, 
             height: canvas.innerHeight
         };
-
         const scene = buildScene();
         const renderer = buildRenderer(screenDimensions);
         var camera = buildCamera(screenDimensions);
         const sceneSubjects = createSceneSubjects(scene);
         
         function buildScene() {
+            /* Add skybox */
+            skyboxLoader = new THREE.CubeTextureLoader();
+            skyboxTexture = skyboxLoader.load([
+                require('ASSETS/pos-x.png'),
+                require('ASSETS/neg-x.png'),
+                require('ASSETS/pos-y.png'),
+                require('ASSETS/neg-y.png'),
+                require('ASSETS/pos-z.png'),
+                require('ASSETS/neg-z.png'),
+            ])
             const scene = new THREE.Scene();
+            scene.background = skyboxTexture;
+
             return scene;
         }
 

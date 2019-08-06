@@ -11,7 +11,7 @@ var TEMPLATE_PATH = path.resolve(ROOT_PATH, 'src/index.html');
 var SHADER_PATH = path.resolve(ROOT_PATH, 'src/shaders');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 var SCSS_PATH = path.resolve(ROOT_PATH,'src/css');
-//var ASSETS_PATH = path.resolve(ROOT_PATH, 'src/assets');
+var ASSETS_PATH = path.resolve(ROOT_PATH, 'src/assets');
 
 var debug = process.env.NODE_ENV !== 'production';
 
@@ -36,8 +36,8 @@ module.exports = {
             SHADERS: SHADER_PATH,
             SRC: SRC_PATH,
             SCSS: SCSS_PATH,
-            JS: JS_PATH
-            //ASSETS: ASSETS_PATH
+            JS: JS_PATH,
+            ASSETS: ASSETS_PATH
         }
     },
     module: {
@@ -66,11 +66,11 @@ module.exports = {
                     "sass-loader" // compiles Sass to CSS, using Node Sass by default
                 ]
             },
-            /*{
+            {
                 test: /\.(png|jpe?g|tga|gif)$/,
                 include: ASSETS_PATH,
                 loader: 'file-loader'
-            }*/
+            }
 
         ]
     },
