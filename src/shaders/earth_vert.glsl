@@ -1,29 +1,35 @@
-uniform float altitude;
-uniform float noiseOffset;
-uniform float surfaceIntensity;
-
-varying vec3 pos;
-varying vec2 st;
 varying float elevation;
 varying vec3 vViewPosition;
-varying vec3 vWorldPosition;
+varying vec3 vPosition;
 varying vec3 vNormal;
 
+uniform float u_amplitude;
+uniform float u_frequency;
+uniform float u_gain;
+uniform float u_lacunarity;
+
+#define OCTAVES 5
+float fbm(vec3 pos, float amplitude, float frequency, float gain, float lacunarity){
+  float value = 0.0;
+
+  for(int i = 0; i <  OCTAVES; i++){
+    value += amplitude * snoise(pos * frequency);
+    frequency *= lacunarity;
+    amplitude *= gain;
+  }
+
+  return value;
+}
 
 void main() {
-  vWorldPosition = position;
+  vPosition = position;
   vNormal = normal;
-  // apply noise to elevation
-  elevation = 0.0;
-  for (float i = 1.0; i < 10.0; i += 1.0) {
-    elevation += (1.0 / i) * snoise(0.01 * i * vWorldPosition + 0.0);
-  }
-  // apply altitude
-  elevation *= 4.;
-  // move position along normal
-  vWorldPosition = vWorldPosition + vNormal * elevation;
-  //The light is in camera coordinates so need the vertex position in camera coords too.
-  vViewPosition = vec3(modelViewMatrix * vec4(vWorldPosition,1.0));
 
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(vWorldPosition, 1.0);
+  elevation = fbm(vPosition, u_amplitude, u_frequency, u_gain, u_lacunarity);
+  vPosition = vPosition + vNormal * elevation;
+
+  //The light is in camera coordinates so need the vertex position in camera coords too.
+  vViewPosition = vec3(modelViewMatrix * vec4(vPosition,1.0));
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
 }
