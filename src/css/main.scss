@@ -8,7 +8,30 @@ canvas {
     display: block;
     width: 100vw;
     height: 100vh;
+}
 
-    // transform-origin: top left;
-    // transform: scale3d(.5);
+#info {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	z-index: 100;
+  display:block;
+  font-family: "Verdana";
+  color: white;
+  font-size: 30px;
+  text-shadow: 2px 2px #000000;
+}
+
+#description {
+	position: absolute;
+  width: 100%;
+  top: 30px;
+	text-align: center;
+	z-index: 100;
+  display:block;
+  font-family: "Verdana";
+  color: white;
+  font-style: italic;
+  font-size: 20px;
+  text-shadow: 2px 2px #000000;
 }

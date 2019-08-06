@@ -19,7 +19,7 @@ module.exports = {
     entry: ENTRY_PATH,
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Procedural Project',
+            title: 'Planet Earth',
             template: TEMPLATE_PATH,
             inject: 'body'
         }),
