@@ -20,16 +20,6 @@ float fbm(vec3 pos){
   return value;
 }
 
-float surface3( vec3 coord ){
-    float height = 0.0;
-    coord	*= 0.8;
-    height	+= abs(cnoise(coord)) * 1.0;
-    height	+= abs(cnoise(coord * 2.0)) * 0.5;
-    height	+= abs(cnoise(coord * 4.0)) * 0.25;
-    height	+= abs(cnoise(coord * 8.0)) * 0.125;
-    return height;
-}
-
 void main() {
   vPosition = position;
   vNormal = normal;

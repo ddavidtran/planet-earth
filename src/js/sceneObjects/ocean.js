@@ -12,12 +12,12 @@ export class Ocean {
         var gui;
         gui = datGUI();
         var guiControls =  new function() {
-            this.Scale = 1.0;
+            this.WaterLevel = 1.0;
           };
           
         var oceanGUI = gui.addFolder('Ocean');
         oceanGUI.open();
-        oceanGUI.add(guiControls, 'Scale', 0.8, 1.05); 
+        oceanGUI.add(guiControls, 'WaterLevel', 0.8, 1.05); 
         oceanUniforms = {
             lightPos: {
                 type: sUniforms["lightPos"].type,
@@ -47,7 +47,7 @@ export class Ocean {
 
         this.update = function (time) {
             oceanObj.rotateY(0.001); 
-            oceanObj.scale.set(guiControls.Scale, guiControls.Scale, guiControls.Scale);
+            oceanObj.scale.set(guiControls.WaterLevel, guiControls.WaterLevel, guiControls.WaterLevel);
             oceanMaterial.uniforms['u_time'].value = .00025 * ( Date.now() - start );
         };
 

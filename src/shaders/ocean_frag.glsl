@@ -29,7 +29,7 @@ vec4 calculateLightning(vec3 vViewPosition, vec3 newNormal){
   
   return vec4(ka * ambientColor + 
               kd *(clampDot(lightDirection,newNormal))*diffuseColor + 
-              ks*pow(clampDot(Rm,V),shininess) * specularColor, 0.8);
+              ks*pow(clampDot(Rm,V),shininess) * specularColor, 0.7);
 }
 
 void main () {

@@ -59,7 +59,6 @@ export class Earth {
 
         earthObj = new THREE.Mesh(new THREE.IcosahedronGeometry(20, 5), earthMaterial);
         scene.add(earthObj);
-        scene.add( new THREE.AxesHelper( 50 ) );
 
         this.update = function (time) {
             sendUniforms();

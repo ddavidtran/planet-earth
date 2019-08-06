@@ -4,6 +4,7 @@ import {Ocean} from 'SRC/js/sceneObjects/ocean.js';
 import {Cloud} from 'SRC/js/sceneObjects/cloud.js';
 
 import * as Stats from 'stats.js';
+import { Glow } from './sceneObjects/glow';
 
 export default class SceneManager {
     constructor(canvas) {
@@ -55,7 +56,8 @@ export default class SceneManager {
                 new PointLight(scene),
                 new Earth(scene),
                 new Ocean(scene),
-                new Cloud(scene)
+                new Cloud(scene),
+                new Glow(scene)
             ];
             return sceneSubjects;
         }
