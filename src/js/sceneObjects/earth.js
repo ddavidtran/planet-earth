@@ -63,7 +63,7 @@ export class Earth {
 
         this.update = function (time) {
             sendUniforms();
-            earthObj.rotateY(0.001); //+= 0.002;
+            earthObj.rotateY(0.001); 
         };
 
         function sendUniforms(){

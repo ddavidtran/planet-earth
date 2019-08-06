@@ -9,16 +9,9 @@ varying float elevation;
 uniform vec3 lightPos;
 uniform float u_time;
 
-struct PointLight {
-    vec3 position;
-    vec3 color;
-};
-
-uniform PointLight pointLights[ NUM_POINT_LIGHTS ];
-
 vec4 calculateLightning(vec3 vViewPosition, vec3 newNormal){
   vec3 lightDirection = normalize(lightPos -  vViewPosition);
-  float ka = 0.5;
+  float ka = .5;
   float kd = 1.0;
   
   //Apply ambient and diffuse phong
