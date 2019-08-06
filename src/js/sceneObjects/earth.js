@@ -15,8 +15,7 @@ export class Earth {
             this.Gain = 0.5;
             this.Lacunarity = 2.0;
           };
-          
-        const gui = new dat.GUI();
+        const gui = new dat.GUI();  
         var earthGUI = gui.addFolder('Earth');
         earthGUI.open();
         earthGUI.add(guiControls, 'Amplitude', 0, 1); 
@@ -24,8 +23,6 @@ export class Earth {
         earthGUI.add(guiControls, 'Gain', 0, 1);
         earthGUI.add(guiControls, 'Lacunarity', 0, 2.5);  
 
-
-        /* Floating Island * */
         earthUniforms = {
             lightPos: {
                 type: sUniforms["lightPos"].type,
