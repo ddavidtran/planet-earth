@@ -1,10 +1,9 @@
 
 #extension GL_OES_standard_derivatives : enable
-
 varying vec3 vPosition;
-varying vec3 vNormal;
 varying vec3 vViewPosition;
 varying float noise;
+
 
 uniform vec3 lightPos;
 
@@ -20,8 +19,8 @@ vec4 calculateLightning(vec3 vViewPosition, vec3 newNormal){
 }
 
 void main() {
-    vec3 newNormal = normalize(cross( dFdx( vViewPosition ), dFdy( vViewPosition ) ));
 
+    vec3 newNormal = normalize(cross( dFdx( vPosition ), dFdy( vPosition ) ));
     /* Hermite interpolation and linear interpolation for clouds */
     vec4 finalColor;
     vec4 cloud1 = vec4(0.0/255.0, 0.0/255.0, 0.0/255.0, 0.0);

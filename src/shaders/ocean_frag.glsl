@@ -1,13 +1,11 @@
 
 #extension GL_OES_standard_derivatives : enable
 
-varying vec2 vUv;
 varying vec3 vPosition;
 varying vec3 vViewPosition;
 
 uniform vec3 lightPos;
 
-const float oceanOpacity = 0.6;
 
 float clampDot(vec3 a, vec3 b) {
   return clamp(dot(a, b), 0.0, 1.0);
@@ -33,7 +31,7 @@ vec4 calculateLightning(vec3 vViewPosition, vec3 newNormal){
 }
 
 void main () {
-  vec3 newNormal = normalize(cross( dFdx( vViewPosition ), dFdy( vViewPosition ) ));
+  vec3 newNormal = normalize(cross( dFdx( vPosition ), dFdy( vPosition ) ));
 
   /* Calculate lightning */
   vec4 lightning = calculateLightning(vViewPosition, newNormal);

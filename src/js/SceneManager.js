@@ -22,7 +22,6 @@ export default class SceneManager {
         /* Orbit Controls */
         var OrbitControls = require('three-orbit-controls')(THREE);
 
-        const clock = new THREE.Clock();
         const screenDimensions = {
             width: canvas.innerWidth, 
             height: canvas.innerHeight

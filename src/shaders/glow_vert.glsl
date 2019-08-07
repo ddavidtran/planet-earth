@@ -1,5 +1,4 @@
 varying float intensity;
-varying vec3 vViewPosition;
 
 void main() {
   /* Calculates dot product of the view vector (cameraPosition) and the normal */
