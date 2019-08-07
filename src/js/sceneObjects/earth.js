@@ -59,7 +59,7 @@ export class Earth {
         });
         
         /* Add object to scene */
-        earthObj = new THREE.Mesh(new THREE.IcosahedronGeometry(20, 5), earthMaterial);
+        earthObj = new THREE.Mesh(new THREE.IcosahedronBufferGeometry(20, 5), earthMaterial);
         scene.add(earthObj);
 
         this.update = function () {

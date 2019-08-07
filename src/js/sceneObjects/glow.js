@@ -31,7 +31,7 @@ export class Glow {
         });
 
         /* Add object to scene */
-        glowObj = new THREE.Mesh(new THREE.IcosahedronGeometry(35, 5), glowMaterial);
+        glowObj = new THREE.Mesh(new THREE.IcosahedronBufferGeometry(35, 4), glowMaterial);
         scene.add(glowObj);
 
         this.update = function (time) {

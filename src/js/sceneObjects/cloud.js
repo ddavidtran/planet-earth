@@ -47,7 +47,7 @@ export class Cloud {
         });
 
         /* Add object to scene */
-        cloudObj = new THREE.Mesh(new THREE.IcosahedronGeometry(27, 5), cloudMaterial);
+        cloudObj = new THREE.Mesh(new THREE.IcosahedronBufferGeometry(27, 4), cloudMaterial);
         scene.add(cloudObj);
 
         this.update = function () {

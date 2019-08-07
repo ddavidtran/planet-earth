@@ -43,7 +43,7 @@ export class Ocean {
         });
 
         /* Add object to scene */
-        oceanObj = new THREE.Mesh(new THREE.IcosahedronGeometry(19, 5), oceanMaterial);
+        oceanObj = new THREE.Mesh(new THREE.IcosahedronBufferGeometry(19, 4), oceanMaterial);
         scene.add(oceanObj);
 
         this.update = function () {
